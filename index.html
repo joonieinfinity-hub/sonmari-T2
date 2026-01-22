@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonmari | Refined Korean-Inspired Dining</title>
+    <meta name="description" content="Refined flavors, handcrafted sushi, and Korean culinary inspiration meet in an intimate, elevated setting." />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sonmari | Refined Korean-Inspired Dining" />
+    <meta property="og:description" content="Where tradition meets modern creativity in the heart of the city." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1590577976322-3d2d6e2133de?auto=format&fit=crop&q=80&w=1200" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Rustic Roadway Font -->
+    <link href="https://fonts.cdnfonts.com/css/rustic-roadway" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              charcoal: '#0F0F0F',
+              ivory: '#F6F4F1',
+              stone: '#B9B4AE',
+              gold: '#C9A24D',
+              brandRed: '#cc0000', // Boston University Red
+              'charcoal-light': '#1A1A1A',
+            },
+            fontFamily: {
+              serif: ['Playfair Display', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+              baskerville: ['Libre Baskerville', 'serif'],
+              sonmari: ['Rustic Roadway', 'cursive'],
+            },
+          }
+        }
+      }
+    </script>
+
+    <style>
+      body {
+        background-color: #0F0F0F;
+        color: #F6F4F1;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        margin: 0;
+      }
+      h1, h2, h3, h4 {
+        font-family: 'Playfair Display', serif;
+        letter-spacing: -0.01em;
+      }
+
+      /* Stylized Brand Logo Text */
+      .logo-text-styled {
+        color: #cc0000 !important; /* Boston University Red */
+        text-shadow: 
+          1px 1px 0px #ffffff; /* Simple white shadow, glow removed */
+        font-weight: 400;
+      }
+
+      /* Micro-interactions */
+      .btn-hover-glow {
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .btn-hover-glow:hover {
+        box-shadow: 0 15px 35px -5px rgba(201, 162, 77, 0.4), 0 0 20px rgba(204, 0, 0, 0.2);
+        transform: translateY(-4px) scale(1.04);
+      }
+      
+      .btn-active-press:active {
+        transform: scale(0.96);
+      }
+
+      /* Core Reveal Logic */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .reveal-left { transform: translateX(-30px); }
+      .reveal-right { transform: translateX(30px); }
+      .reveal-scale { transform: scale(0.98); }
+      
+      .reveal.reveal-visible {
+        opacity: 1;
+        transform: translate(0) scale(1);
+      }
+
+      /* Explicit Stagger Delays */
+      .delay-100 { transition-delay: 100ms !important; }
+      .delay-200 { transition-delay: 200ms !important; }
+      .delay-300 { transition-delay: 300ms !important; }
+      .delay-400 { transition-delay: 400ms !important; }
+      .delay-500 { transition-delay: 500ms !important; }
+
+      @keyframes writing-reveal {
+        0% {
+          clip-path: inset(0 100% 0 0);
+          opacity: 0;
+          transform: translateY(15px) scale(0.95);
+          filter: blur(12px);
+        }
+        100% {
+          clip-path: inset(0 0 0 0);
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      .animate-writing {
+        animation: writing-reveal 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      }
+      
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 3px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(201, 162, 77, 0.2);
+        border-radius: 9999px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #C9A24D;
+      }
+
+      @keyframes scroll-progress {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+      }
+    </style>
+    
+    <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+  }
+}
+</script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
