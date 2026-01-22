@@ -99,6 +99,16 @@ const SEOManager = () => {
       document.title = `${currentSEO.title} | ${config.name}`;
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', currentSEO.description);
+      
+      const metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (metaKeywords && currentSEO.keywords) {
+        metaKeywords.setAttribute('content', currentSEO.keywords);
+      } else if (currentSEO.keywords) {
+        const meta = document.createElement('meta');
+        meta.name = "keywords";
+        meta.content = currentSEO.keywords;
+        document.head.appendChild(meta);
+      }
     } else {
       document.title = `${config.name} | ${config.tagline}`;
     }
@@ -275,6 +285,7 @@ const ThemePanel = () => {
   const [activeTab, setActiveTab] = useState<'general' | 'seo' | 'blog' | 'menu' | 'logo' | 'atmosphere'>('general');
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
   
   const { 
@@ -286,9 +297,12 @@ const ThemePanel = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (usernameInput === 'Admin' && passwordInput === 'SONMARI@2025') {
+    if (usernameInput === 'Admin' && passwordInput === 'SONMARI@2026') {
       login(usernameInput);
       setLoginError('');
+      setUsernameInput('');
+      setPasswordInput('');
+      setShowPassword(false);
       setShowLoginModal(false);
       setIsDashboardOpen(true);
     } else {
@@ -306,8 +320,29 @@ const ThemePanel = () => {
             <button onClick={() => setShowLoginModal(false)} className="absolute top-8 right-8 text-stone hover:text-brandRed"><X size={24} /></button>
             <h2 className="text-3xl font-serif italic text-brandRed mb-10 text-center">Staff Access</h2>
             <form onSubmit={handleLogin} className="space-y-6">
-              <input type="text" value={usernameInput} onChange={(e) => setUsernameInput(e.target.value)} placeholder="Username" className="w-full bg-charcoal border border-white/10 p-4 rounded-xl text-ivory outline-none focus:border-brandRed" />
-              <input type="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} placeholder="Password" className="w-full bg-charcoal border border-white/10 p-4 rounded-xl text-ivory outline-none focus:border-brandRed" />
+              <input 
+                type="text" 
+                value={usernameInput} 
+                onChange={(e) => setUsernameInput(e.target.value)} 
+                placeholder="Username" 
+                className="w-full bg-charcoal border border-white/10 p-4 rounded-xl text-ivory outline-none focus:border-brandRed" 
+              />
+              <div className="relative">
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  value={passwordInput} 
+                  onChange={(e) => setPasswordInput(e.target.value)} 
+                  placeholder="Password" 
+                  className="w-full bg-charcoal border border-white/10 p-4 pr-12 rounded-xl text-ivory outline-none focus:border-brandRed" 
+                />
+                <button 
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-stone/50 hover:text-brandRed transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               {loginError && <p className="text-brandRed text-[10px] text-center uppercase tracking-widest">{loginError}</p>}
               <button type="submit" className="w-full bg-brandRed text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-brandRed transition-all">Sign In</button>
             </form>
@@ -375,10 +410,18 @@ const App = () => {
     }
   };
 
+  const DEFAULT_SEO: Record<string, SEOData> = {
+    '/about': {
+      title: 'Our Story',
+      description: 'Sonmari: A modern expression of Korean culinary inspiration blending traditional flavors with contemporary techniques.',
+      keywords: 'Korean dining, modern Korean, culinary inspiration, tradition and innovation, Sonmari story'
+    }
+  };
+
   const [config, setConfig] = useState<SiteConfig>(() => loadInitial('sonmari_config', INITIAL_CONFIG));
   const [menu, setMenu] = useState<MenuItem[]>(() => loadInitial('sonmari_menu', MENU_ITEMS));
   const [posts, setPosts] = useState<BlogPost[]>(() => loadInitial('sonmari_posts', BLOG_POSTS));
-  const [seo, setSeo] = useState<Record<string, SEOData>>(() => loadInitial('sonmari_seo', {}));
+  const [seo, setSeo] = useState<Record<string, SEOData>>(() => loadInitial('sonmari_seo', DEFAULT_SEO));
   
   const [isAuthenticated, setIsAuthenticated] = useState(() => localStorage.getItem('sonmari_auth') === 'true');
   const [userEmail, setUserEmail] = useState<string | null>(() => localStorage.getItem('sonmari_user'));

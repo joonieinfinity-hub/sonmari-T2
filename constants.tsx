@@ -1,4 +1,3 @@
-
 import { MenuItem, BlogPost, SiteConfig } from './types';
 
 export const INITIAL_CONFIG: SiteConfig = {
@@ -10,12 +9,13 @@ export const INITIAL_CONFIG: SiteConfig = {
   address: "123 Elegance Way, New York, NY 10013",
   phone: "(212) 555-0199",
   email: "concierge@sonmari.com",
-  instagram: "https://www.instagram.com/sonmari_nyc",
+  instagram: "https://www.instagram.com/sonmari.nyc",
   facebook: "https://facebook.com/sonmarirestaurant",
   heroImages: [
-    "https://images.unsplash.com/photo-1590577976322-3d2d6e2133de?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1581339393878-364230673397?auto=format&fit=crop&q=80&w=1600",
-    "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&q=80&w=1600"
+    "https://image2url.com/r2/default/images/1769085561523-6465d884-01fc-4731-a654-5b75c4616671.jpg",
+    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=1600",
+    "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&q=80&w=1600",
+    "https://image2url.com/r2/default/images/1769086587929-e341648d-1293-4b31-bc58-b02a085be5af.jpg"
   ],
   aboutText: "Sonmari was created as a modern expression of Korean culinary inspiration, blending traditional flavors with contemporary techniques. Rooted in respect for ingredients and driven by creativity, our kitchen reimagines comfort and sophistication on every plate.",
   aboutImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=800",
